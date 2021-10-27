@@ -6,7 +6,12 @@
         {
             "label": "run-py",
             "type": "shell",
-            "command": "python.exe hello.py"
+            "command": "python.exe hello.py",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
