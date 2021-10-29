@@ -28,8 +28,8 @@ def prep_pixels(train, test):
 	return train_norm, test_norm
 
 def run_example():
-	img = load_image('sample_image.png')
-	model = load_model('final_model.h5')
+	img = load_image('test_images\\car_1.png')
+	model = load_model('models\\final_model_70_percent.h5')
 	predict_x = model.predict(img)
 	classes_x = np.argmax(predict_x, axis=1)
 	print("result: ", classes_x[0])
@@ -37,7 +37,7 @@ def run_example():
 def run_test_harness():
 	trainX, trainY, testX, testY = load_dataset()
 	trainX, testX = prep_pixels(trainX, testX)
-	model = load_model('final_model.h5')
+	model = load_model('models\\final_model_70_percent.h5')
 	_, acc = model.evaluate(testX, testY, verbose=0)
 	print('> %.3f' % (acc * 100.0))
  

@@ -83,7 +83,7 @@ def run_test_harness():
 	_, acc = model.evaluate(testX, testY, verbose=1)
 	print('> %.3f' % (acc * 100.0))
 	summarize_diagnostics(history)
-	model.save('final_model.h5')
+	model.save('models\\final_model.h5')
  
 
 if __name__ == "__main__":
