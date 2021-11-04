@@ -28,7 +28,7 @@ def prep_pixels(train, test):
 	return train_norm, test_norm
 
 def run_example():
-	img = load_image('test_images\\car_1.png')
+	img = load_image('test_images\\pickup_truck.jpg')
 	model = load_model('models\\final_model_70_percent.h5')
 	predict_x = model.predict(img)
 	classes_x = np.argmax(predict_x, axis=1)
