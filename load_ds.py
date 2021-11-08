@@ -2,6 +2,7 @@ from PIL import Image
 import numpy as np
 import os
 
+
 def dump_fruit_images_to_training_dir():
 	fruits_training_path = "external_images\\fruits\\training\\"
 	os.chdir(fruits_training_path)
@@ -24,29 +25,39 @@ def dump_fruit_images_to_training_dir():
 
 	return
 
-if __name__ == "__main__":
-	# DO NOT RUN THE BELOW FUNCTION!!
-	# dump_fruit_images_to_training_dir()
 
+def dump_training_npy():
 	all_directories = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck", "fruits"]
 	train_dir = "cifar-10-images\\train\\"
-	all_images = []
+	final_arr = []
 
 	for dir in all_directories:
 		files = os.listdir(train_dir + dir)
 		for file in files:
 			full_path = train_dir + dir + "\\" + file
 			im = Image.open(full_path)
-			pix = im.load()
-			current_image = []
-			for i in range(0, 32):
-				row_vals = []
-				for j in range(0, 32):
-					row_vals.append(pix[i, j])
-				current_image.append(row_vals)
-			all_images.append(current_image)
+			im = np.asarray(im)
+			final_arr.append(im)
 		print("Done loading ", dir)
 
-	numpy_arr = np.array(all_images)
+	numpy_arr = np.array(final_arr)
 	np.save('all_images_training.npy', numpy_arr)
 	print("shape: ", numpy_arr.shape)
+	
+
+def load_from_training_npy():
+	np_arr = np.load("all_images_training.npy")
+	test = np_arr[52000]
+
+	assert_msg = 'Input shall be a HxWx3 ndarray'
+	assert isinstance(test, np.ndarray), assert_msg
+	assert len(test.shape) == 3, assert_msg
+	assert test.shape[2] == 3, assert_msg
+
+	img = Image.fromarray(test, "RGB")
+	img.save("test.jpg")
+
+
+if __name__ == "__main__":
+	load_from_training_npy()
+	#dump_training_npy()

@@ -17,9 +17,6 @@ def load_dataset():
 	(trainX, trainY), (testX, testY) = cifar10.load_data()
 	trainY = to_categorical(trainY)
 	testY = to_categorical(testY)
-
-	print("shape: ", trainX.shape)
-
 	return trainX, trainY, testX, testY
  
 
