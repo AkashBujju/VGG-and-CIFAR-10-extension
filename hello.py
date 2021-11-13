@@ -75,15 +75,15 @@ def summarize_diagnostics(history):
 def run_test_harness():
 	trainX, trainY, testX, testY = load_dataset()
 	trainX, testX = prep_pixels(trainX, testX)
-	# model = define_model()
-	# datagen = ImageDataGenerator(width_shift_range=0.1, height_shift_range=0.1, horizontal_flip=True)
-	# it_train = datagen.flow(trainX, trainY, batch_size=1024)
-	# steps = int(trainX.shape[0] / 1024)
-	# history = model.fit(it_train, steps_per_epoch=steps, epochs=400, validation_data=(testX, testY), verbose=1)
-	# _, acc = model.evaluate(testX, testY, verbose=1)
-	# print('> %.3f' % (acc * 100.0))
-	# summarize_diagnostics(history)
-	# model.save('models\\final_model.h5')
+	model = define_model()
+	datagen = ImageDataGenerator(width_shift_range=0.1, height_shift_range=0.1, horizontal_flip=True)
+	it_train = datagen.flow(trainX, trainY, batch_size=1024)
+	steps = int(trainX.shape[0] / 1024)
+	history = model.fit(it_train, steps_per_epoch=steps, epochs=400, validation_data=(testX, testY), verbose=1)
+	_, acc = model.evaluate(testX, testY, verbose=1)
+	print('> %.3f' % (acc * 100.0))
+	summarize_diagnostics(history)
+	model.save('models\\final_model.h5')
  
 
 if __name__ == "__main__":
