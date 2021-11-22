@@ -18,10 +18,13 @@ def load_image(filename):
 
 def run_example(filename):
 	img = load_image(filename)
-	model = load_model('models\\custom_model.h5')
+	model_filename = 'models\\model_with_fruits.h5'
+	model = load_model(model_filename)
+	print("Loaded model: ", model_filename)
+
 	predict_x = model.predict(img)
 	classes_x = np.argmax(predict_x, axis=1)
-	names = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck", "fruit"]
+	names = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck", "fruit", "human"]
 	index = classes_x[0]
 	return names[index]
  
@@ -74,4 +77,3 @@ class Demo:
 if __name__ == "__main__":
 	demo = Demo()
 	demo.start_it()
-
